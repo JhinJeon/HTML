@@ -4,7 +4,7 @@
 import sys
 import json
 import gamesystem
-
+import requests
 
 # 1. 플레이어가 입력한 단어 가져오기
 
@@ -18,9 +18,11 @@ for p in player_input:
     if p in gamesystem.invalid_str:
         print('다시 입력하세요.')
 
-# 2. 네이버 사전 API에서 단어 검색
+# 2. 국립국어원 사전 API에서 단어 검색
 
-
+url = f'https://stdict.korean.go.kr/api/search.do?key=&q={player_input}'
+response = requests.get(url).json()
+results = response.get('results')
 # 3-1. 1의 단어를 2에서 찾을 수 없는 경우 다시 입력하라고 보내기
 
 
